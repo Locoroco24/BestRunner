@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './App.css';
 import Table from "./SportTable/Table";
+import Popup from "./SportTable/Popup/Popup";
 
 class App extends Component {
 
@@ -13,7 +14,6 @@ class App extends Component {
     addRow() {
       let newRows = this.state.workouts
       newRows.push({id: 3, date: new Date().toString().split(' ').slice(0, 4).join(' '), type: 'Бег', distance: '14км', description: 'Было сложно', edit: 'Кнопка'})
-      console.log(newRows)
       this.setState({workouts: newRows})
     }
   }
@@ -24,8 +24,9 @@ class App extends Component {
         <div className="App">
           <Table
               workouts={this.state.workouts}
-              addRow={this.state.addRow.bind(this)}
           />
+
+            <Popup />
         </div>
     )
   }

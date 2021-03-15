@@ -14,7 +14,6 @@ const Table = props => {
     return (
         <div>
             <h1>BestRunner</h1>
-            <button onClick={props.addRow}></button>
             <select>
                 <option defaultValue value='run'>Бег</option>
                 <option value='bike'>Велосипед</option>
