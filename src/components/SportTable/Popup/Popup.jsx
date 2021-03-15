@@ -1,21 +1,33 @@
 import React from 'react'
 import ReactModal from 'react-modal'
-import Calendar from "./Calendar";
+import Calendar from "./Calendar"
 
 const Popup = props => {
 
-    const [modalIsOpen,setIsOpen] = React.useState(false);
+    const [modalIsOpen,setIsOpen] = React.useState(false)
 
     function afterOpenModal() {
 
     }
 
     function openModal() {
-        setIsOpen(true);
+        setIsOpen(true)
     }
 
-    function closeModal(){
-        setIsOpen(false);
+    function closeModal() {
+        setIsOpen(false)
+    }
+
+    function confirmWorkout(event) {
+        if (window.confirm('Сохранить тренировку?')) {
+            closeModal()
+        }
+        event.preventDefault()
+    }
+
+    const style = {
+        content: {
+        }
     }
 
     return (
@@ -27,9 +39,10 @@ const Popup = props => {
                 onRequestClose={closeModal}
                 ariaHideApp={false}
                 contentLabel="Example Modal"
+                style={style}
             >
-                <h2 >Информация о тренировке</h2>
-                <form>
+                <h2>Информация о тренировке</h2>
+                <form action="/#" method="get">
                     <div>
                         <h3>Выберите тип тренировки</h3>
                         <label htmlFor="run">
@@ -47,12 +60,14 @@ const Popup = props => {
                     </div>
                     <div>
                         <h3>Дата тренировки</h3>
-                        <Calendar />
+                        <label htmlFor="date">
+                            <Calendar />
+                        </label>
                     </div>
                     <div>
                         <h3>Километраж</h3>
                         <label htmlFor="distance">
-                            <input type="number" id="distance" name="distance" />
+                            <input type="number" id="distance" name="distance" min="0" />
                         </label>
                     </div>
                     <div>
@@ -61,7 +76,7 @@ const Popup = props => {
                             <input type="text" id="description" name="description" placeholder="Заметки о тренировке"/>
                         </label>
                     </div>
-                    <button onClick={closeModal}>Добавить тренировку</button>
+                    <button onClick={confirmWorkout}>Добавить тренировку</button>
                 </form>
             </ReactModal>
         </div>

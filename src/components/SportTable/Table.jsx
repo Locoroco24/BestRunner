@@ -14,6 +14,7 @@ const Table = props => {
     return (
         <div>
             <h1>BestRunner</h1>
+            Фильтрация по типу тренировки
             <select>
                 <option defaultValue value='run'>Бег</option>
                 <option value='bike'>Велосипед</option>
