@@ -1,0 +1,75 @@
+import React from 'react'
+import useSortableData from "./SortableData"
+
+const Table = props => {
+
+    const { items, requestSort, sortConfig } = useSortableData(props.workouts)
+    const getClassNamesFor = (name) => {
+        if (!sortConfig) {
+            return
+        }
+        return sortConfig.key === name ? sortConfig.direction : undefined
+    }
+
+    return (
+        <div>
+            <h1>BestRunner</h1>
+            <button onClick={props.addRow}></button>
+            <select>
+                <option defaultValue value='run'>Бег</option>
+                <option value='bike'>Велосипед</option>
+                <option value='ski'>Лыжи</option>
+                <option value='walking'>Ходьба</option>
+            </select>
+            <table>
+                <thead>
+                <tr>
+                    <th>
+                        Дата тренировки
+                        <button
+                            type="button"
+                            onClick={() => requestSort('date')}
+                            className={getClassNamesFor('date')}
+                        ></button>
+                    </th>
+                    <th>
+                        Тип тренировки
+                        <button
+                            type="button"
+                            onClick={() => requestSort('type')}
+                            className={getClassNamesFor('type')}
+                        ></button>
+                    </th>
+                    <th>
+                        Километраж
+                        <button
+                            type="button"
+                            onClick={() => requestSort('distance')}
+                            className={getClassNamesFor('distance')}
+                        ></button>
+                    </th>
+                    <th>
+                        Комментарии
+                    </th>
+                    <th>
+                        Редактирование
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                    {items.map(item => (
+                        <tr key={item.id}>
+                            <td>{item.date}</td>
+                            <td>{item.type}</td>
+                            <td>{item.distance}</td>
+                            <td>{item.description}</td>
+                            <td>{item.edit}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
+    )
+}
+
+export default Table
