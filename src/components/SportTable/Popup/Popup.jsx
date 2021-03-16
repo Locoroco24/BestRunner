@@ -1,26 +1,27 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ReactModal from 'react-modal'
 import Calendar from "./Calendar"
 
 const Popup = props => {
 
-    const [modalIsOpen,setIsOpen] = React.useState(false)
+    const [modalIsOpen,setIsOpen] = useState(false)
 
-    function afterOpenModal() {
+    const afterOpenModal = () => {
 
     }
 
-    function openModal() {
+    const openModal = () => {
         setIsOpen(true)
     }
 
-    function closeModal() {
+    const closeModal = () => {
         setIsOpen(false)
     }
 
-    function confirmWorkout(event) {
+    const confirmWorkout = event => {
         if (window.confirm('Сохранить тренировку?')) {
             closeModal()
+            props.addRow()
         }
         event.preventDefault()
     }

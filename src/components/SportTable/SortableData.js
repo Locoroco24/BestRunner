@@ -1,9 +1,10 @@
-import React from "react"
+// eslint-disable-next-line no-unused-vars
+import React, { useState, useMemo } from 'react'
 
 const useSortableData = (items, config = null) => {
-    const [sortConfig, setSortConfig] = React.useState(config)
+    const [sortConfig, setSortConfig] = useState(config)
 
-    const sortedItems = React.useMemo(() => {
+    const sortedItems = useMemo(() => {
         let sortableItems = [...items]
         if (sortConfig !== null) {
             sortableItems.sort((a, b) => {
@@ -18,6 +19,7 @@ const useSortableData = (items, config = null) => {
         }
         return sortableItems
     }, [items, sortConfig])
+
 
     const requestSort = key => {
         let direction = 'ascending'

@@ -1,35 +1,33 @@
-import React, { Component } from 'react'
+import React, { useState} from 'react'
 import './App.css';
 import Table from "./SportTable/Table";
 import Popup from "./SportTable/Popup/Popup";
 
-class App extends Component {
+function App() {
 
-  state = {
-    workouts: [
+  const [workouts, setWorkout] = useState([
       {id: 1, date: new Date().toString().split(' ').slice(0, 4).join(' '), type: 'Плаванье', distance: '10км', description: 'Было легко', edit: 'Кнопка'},
       {id: 2, date: new Date().toString().split(' ').slice(0, 4).join(' '), type: 'Бег', distance: '12км', description: 'Было сложно', edit: 'Кнопка'}
-    ],
+      ])
 
-    addRow() {
-      let newRows = this.state.workouts
-      newRows.push({id: 3, date: new Date().toString().split(' ').slice(0, 4).join(' '), type: 'Бег', distance: '14км', description: 'Было сложно', edit: 'Кнопка'})
-      this.setState({workouts: newRows})
-    }
+  const addRow = () => {
+      let copyRows = [...workouts]
+      copyRows.push({id: 3, date: new Date().toString().split(' ').slice(0, 4).join(' '), type: 'Бег', distance: '14км', description: 'Было сложно', edit: 'Кнопка'})
+      setWorkout(copyRows)
   }
 
-  render() {
 
-    return (
-        <div className="App">
+  return (
+      <div className="App">
           <Table
-              workouts={this.state.workouts}
+              workouts={workouts}
           />
 
-            <Popup />
-        </div>
-    )
-  }
+              <Popup
+                  addRow={addRow.bind(this)}
+              />
+      </div>
+  )
 }
 
 export default App;

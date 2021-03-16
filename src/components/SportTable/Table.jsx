@@ -2,7 +2,6 @@ import React from 'react'
 import useSortableData from "./SortableData"
 
 const Table = props => {
-
     const { items, requestSort, sortConfig } = useSortableData(props.workouts)
     const getClassNamesFor = (name) => {
         if (!sortConfig) {
