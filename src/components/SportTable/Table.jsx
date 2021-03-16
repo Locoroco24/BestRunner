@@ -14,11 +14,10 @@ const Table = props => {
         <div>
             <h1>BestRunner</h1>
             Фильтрация по типу тренировки
-            <select>
-                <option defaultValue value='run'>Бег</option>
-                <option value='bike'>Велосипед</option>
-                <option value='ski'>Лыжи</option>
-                <option value='walking'>Ходьба</option>
+            <select onChange={props.filterType}>
+                {props.typeList.map( (type, index) => (
+                    <option key={index} value={type.value}>{type.value}</option>
+                ))}
             </select>
             <table>
                 <thead>

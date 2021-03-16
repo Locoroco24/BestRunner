@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import ReactModal from 'react-modal'
-import Calendar from "./Calendar"
 
 const Popup = props => {
 
@@ -19,7 +18,29 @@ const Popup = props => {
     }
 
     const confirmWorkout = event => {
+
         if (window.confirm('Сохранить тренировку?')) {
+
+            let radioElements = document.getElementsByName('type')
+
+            let checkedRadio = () => {
+                for (let i = 0; i < radioElements.length; i++) {
+                    if (radioElements[i].checked) {
+                        return radioElements[i].value
+                    }
+                }
+            }
+
+            let workoutData = {
+                type: checkedRadio(),
+                date: document.getElementById('date').value,
+                distance: +document.getElementById('distance').value,
+                description: document.getElementById('description').value,
+                id: Date.now()
+            }
+
+            localStorage.setItem('workoutData', JSON.stringify(workoutData))
+
             closeModal()
             props.addRow()
         }
@@ -46,23 +67,22 @@ const Popup = props => {
                 <form action="/#" method="get">
                     <div>
                         <h3>Выберите тип тренировки</h3>
-                        <label htmlFor="run">
-                            <input value="run" type="radio" id="run" name="type" defaultChecked />Бег
-                        </label>
-                        <label htmlFor="bike">
-                            <input value="bike" type="radio" id="bike" name="type" />Велосипед
-                        </label>
-                        <label htmlFor="ski">
-                            <input value="ski" type="radio" id="ski" name="type" />Лыжи
-                        </label>
-                        <label htmlFor="walking">
-                            <input value="walking" type="radio" id="walking" name="type" />Хотьба
-                        </label>
+                        {props.typeList.map( (type, index) => {
+                            if (index > 0) {
+                                return (
+                                    <label key={index} htmlFor={type.id}>
+                                        <input value={type.value} type="radio" id={type.id} name="type" />{type.value}
+                                    </label>
+                                )
+                            }
+                            return null
+                            }
+                        )}
                     </div>
                     <div>
                         <h3>Дата тренировки</h3>
                         <label htmlFor="date">
-                            <Calendar />
+                            <input type="date" id="date" name="date" />
                         </label>
                     </div>
                     <div>
