@@ -1,14 +1,14 @@
-import React from 'react'
-import useSortableData from "./SortableData"
+import React from 'react';
+import useSortableData from "./SortableData";
 
 const Table = props => {
-    const { items, requestSort, sortConfig } = useSortableData(props.workouts)
+    const { items, requestSort, sortConfig } = useSortableData(props.workouts);
     const getClassNamesFor = (name) => {
         if (!sortConfig) {
-            return
+            return;
         }
-        return sortConfig.key === name ? sortConfig.direction : undefined
-    }
+        return sortConfig.key === name ? sortConfig.direction : undefined;
+    };
 
     return (
         <div>
@@ -56,12 +56,15 @@ const Table = props => {
                 </thead>
                 <tbody>
                     {items.map(item => (
-                        <tr key={item.id}>
+                        <tr key={item.key}>
                             <td>{item.date}</td>
                             <td>{item.type}</td>
                             <td>{item.distance}</td>
                             <td>{item.description}</td>
-                            <td>{item.edit}</td>
+                            <td>
+                                <button onClick={() => props.editRow(item.key)}>Редактировать</button>
+                                <button onClick={() => props.deleteRow(item.key)}>Удалить</button>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
