@@ -1,7 +1,7 @@
 import React, { useState} from 'react';
 import './App.css';
-import Table from "./SportTable/Table";
-import Popup from "./SportTable/Popup";
+import WorkoutTable from "../SportTable/Table";
+import Popup from "../Popup/Popup";
 
 function App() {
 
@@ -39,9 +39,9 @@ function App() {
     };
 
     const editRow = (key) => {
-        const editRow = workouts.findIndex( row => row.key === key )
-        console.log(workouts[editRow])
-    }
+        const editRow = workouts.findIndex( row => row.key === key );
+        console.log(workouts[editRow]);
+    };
 
     const filterType = (event) => {
         const targetFilter = event.target.value;
@@ -58,17 +58,17 @@ function App() {
 
     return (
         <div className="container">
-                <Table
-                    workouts={workouts}
-                    filterType={filterType.bind(this)}
-                    typeList={typeList}
-                    deleteRow={deleteRow}
-                    editRow={editRow}
-                 />
-                <Popup
-                    addRow={addRow.bind(this)}
-                    typeList={typeList}
-                />
+            <WorkoutTable
+                workouts={workouts}
+                filterType={filterType.bind(this)}
+                typeList={typeList}
+                deleteRow={deleteRow}
+                editRow={editRow}
+             />
+            <Popup
+                addRow={addRow.bind(this)}
+                typeList={typeList}
+            />
         </div>
     )
 }

@@ -4,33 +4,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from 'yup';
 import { css } from '@emotion/css';
 import styled from "@emotion/styled";
-
-const H2 = styled.h2`
-    text-align: center;
-    margin-bottom: 20px;
-`
-
-const H3 = styled.h3`
-    text-align: center;
-    margin: 30px 0 25px;
-`
-
-const Button = styled.button`
-    max-width: 100%;
-    width: 300px;
-    margin: 40px 0 30px;
-    padding: 5px 15px;
-    font-family: Calibri, sans-serif;
-    font-size: 18px;
-    text-transform: uppercase;
-    color: #fff;
-    background: #000;
-    transition: opacity .4s;
-    &:hover {
-    cursor: pointer;
-    opacity: 0.75;
-    }
-`
+import {Button, H2, H3, Div} from "../Styled";
 
 const Popup = props => {
 
@@ -59,7 +33,7 @@ const Popup = props => {
     const onSubmit = values => {
         if (window.confirm('Сохранить тренировку?')) {
 
-            values.key = `${values.type}_${Date.now()}`
+            values.key = `${values.type}_${Date.now()}`;
 
             localStorage.setItem('workoutData', JSON.stringify(values));
 
@@ -75,25 +49,23 @@ const Popup = props => {
             .typeError('Введите числовое значение')
             .positive('Введите значение больше 0')
             .required('Заполните поле')
-    })
-
-    const style = {
-        overlay: {
-            // background: 'url("../../img/modalBackground.jpg") no-repeat center'
-        }
-    };
+    });
 
     return (
         <div className={css`
             text-align: center;
         `}>
-            <Button onClick={openModal}>Добавить тренировку</Button>
+            <Button
+                className="addWorkout"
+                onClick={openModal}
+            >
+                Добавить тренировку
+            </Button>
             <ReactModal
                 isOpen={modalIsOpen}
                 onAfterOpen={afterOpenModal}
                 onRequestClose={closeModal}
                 ariaHideApp={false}
-                style={style}
             >
                 <H2>Информация о тренировке</H2>
                 <Formik
@@ -106,18 +78,15 @@ const Popup = props => {
                         flex-direction: column;
                         align-items: center;
                     `}>
-                        <div>
+                        <Div>
                             <H3>Выберите тип тренировки</H3>
+                            <Div className="workoutType">
                             {props.typeList.map( (type, index) => {
                                 if (index > 0) {
                                     return (
                                         <label
                                             key={index}
                                             htmlFor={type.id}
-                                            className={css`
-                                                font-family: Calibri, sans-serif;
-                                                font-size: 18px;
-                                            `}
                                         >
                                             <Field
                                                 value={type.value}
@@ -132,13 +101,9 @@ const Popup = props => {
                                 return null
                             }
                             )}
-                        </div>
-                        <div className={css`
-                            max-width: 100%;
-                            display: flex;
-                            flex-direction: column;
-                            align-items: center;
-                        `}>
+                            </Div>
+                        </Div>
+                        <Div>
                             <H3>Дата тренировки</H3>
                             <label htmlFor="date"></label>
                             <Field
@@ -149,8 +114,8 @@ const Popup = props => {
                                 max-width: 100%;
                                 width: 300px;
                                 padding: 5px 15px;
-                                font-family: Calibri, sans-serif;
-                                font-size: 18px;
+                                font-family: inherit;
+                                font-size: inherit;
                                 text-transform: uppercase;
                                 `}
                             />
@@ -164,13 +129,8 @@ const Popup = props => {
                                 color: #f00;
                                 `}
                             />
-                        </div>
-                        <div className={css`
-                            max-width: 100%;
-                            display: flex;
-                            flex-direction: column;
-                            align-items: center;
-                        `}>
+                        </Div>
+                        <Div>
                             <H3>Километраж</H3>
                             <label htmlFor="distance"></label>
                             <Field
@@ -194,13 +154,8 @@ const Popup = props => {
                                 color: #f00;
                                 `}
                             />
-                        </div>
-                        <div className={css`
-                            max-width: 100%;
-                            display: flex;
-                            flex-direction: column;
-                            align-items: center;
-                        `}>
+                        </Div>
+                        <Div>
                             <H3>Комментарий</H3>
                             <label htmlFor="description"></label>
                             <Field
@@ -214,12 +169,17 @@ const Popup = props => {
                                 width: 300px;
                                 resize: none;
                                 padding: 5px 15px;
-                                font-family: Calibri, sans-serif;
-                                font-size: 18px;
+                                font-family: inherit;
+                                font-size: inherit;
                                 `}
                             />
-                        </div>
-                        <Button type='submit'>Добавить тренировку</Button>
+                        </Div>
+                        <Button
+                            className="addWorkout"
+                            type='submit'
+                        >
+                            Добавить тренировку
+                        </Button>
                     </Form>
                 </Formik>
             </ReactModal>

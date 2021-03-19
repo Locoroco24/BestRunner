@@ -1,29 +1,9 @@
 import React from 'react';
 import useSortableData from "./SortableData";
 import { css } from '@emotion/css';
-import styled from "@emotion/styled";
+import {Table, Td, Th, Button, H1, P, Select} from "../Styled";
 
-
-const Th = styled.th`
-        border: 3px #222 solid;
-        color: #fff;
-        background: linear-gradient(0deg, #555, #000);
-        &:first-of-type {
-        width: 15%;
-        }
-        `
-
-const Td = styled.td`
-        border: 2px #222 solid;
-        background: #fff;
-        text-align: center;
-        `
-
-const Button = styled.button`
-        margin: 0 10px;
-`
-
-const Table = props => {
+const WorkoutTable = props => {
     const { items, requestSort, sortConfig } = useSortableData(props.workouts);
     const getClassNamesFor = (name) => {
         if (!sortConfig) {
@@ -34,13 +14,7 @@ const Table = props => {
 
     return (
         <div>
-            <h1
-                className={css`
-                margin-top: 30px;
-                text-align: center;
-            `}>
-                BestRunner
-            </h1>
+            <H1>BestRunner</H1>
             <div
                 className={css`
                 margin-top: 30px;
@@ -48,21 +22,8 @@ const Table = props => {
                 justify-content: flex-end;
                 align-items: center;
             `}>
-                <p
-                    className={css`
-                    margin-right: 20px;
-                `}>
-                    Фильтрация по типу тренировки
-                </p>
-                <select
-                    className={css`
-                    padding: 5px 10px;
-                    &:hover {
-                    cursor: pointer;
-                    }
-                    `}
-                    onChange={props.filterType}
-                >
+                <P>Фильтрация по типу тренировки</P>
+                <Select onChange={props.filterType}>
                     {props.typeList.map( (type, index) => (
                         <option
                             key={index}
@@ -71,43 +32,37 @@ const Table = props => {
                             {type.value}
                         </option>
                     ))}
-                </select>
+                </Select>
             </div>
-            <table
-                className={css`
-                margin-top: 20px;
-                width: 100%;
-                border: 3px #222 solid;
-                border-collapse: collapse;
-            `}>
+            <Table>
                 <thead>
                 <tr>
                     <Th>
-                        <button
+                        <Button
                             type="button"
                             onClick={() => requestSort('date')}
                             className={getClassNamesFor('date')}
                         >
                             Дата тренировки
-                        </button>
+                        </Button>
                     </Th>
                     <Th>
-                        <button
+                        <Button
                             type="button"
                             onClick={() => requestSort('type')}
                             className={getClassNamesFor('type')}
                         >
                             Тип тренировки
-                        </button>
+                        </Button>
                     </Th>
                     <Th>
-                        <button
+                        <Button
                             type="button"
                             onClick={() => requestSort('distance')}
                             className={getClassNamesFor('distance')}
                         >
                             Километраж
-                        </button>
+                        </Button>
                     </Th>
                     <Th>
                         Комментарии
@@ -125,23 +80,23 @@ const Table = props => {
                             <Td>{item.distance}</Td>
                             <Td>{item.description}</Td>
                             <Td>
-                                <Button
+                                <button
                                     onClick={() => props.editRow(item.key)}
                                 >
                                     Редактировать
-                                </Button>
-                                <Button
+                                </button>
+                                <button
                                     onClick={() => props.deleteRow(item.key)}
                                 >
                                     Удалить
-                                </Button>
+                                </button>
                             </Td>
                         </tr>
                     ))}
                 </tbody>
-            </table>
+            </Table>
         </div>
     )
 }
 
-export default Table
+export default WorkoutTable
