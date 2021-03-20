@@ -1,4 +1,3 @@
-import { css } from '@emotion/css';
 import styled from "@emotion/styled";
 
 
@@ -39,24 +38,35 @@ export const Button = styled.button`
         }
         &.ascending {
             &:after {
-                content: '👇';
+                content: '\\2B07';
                 position: absolute;
-                right: -25px;
+                right: -15px;
             }
         };
         &.descending {
             &:after {
-                content: '☝';
+                content: '\\2B06';
                 position: absolute;
-                right: -25px;
+                right: -15px;
             }
         }
-        &.addWorkout {
+        &.addWorkout, &.closePopup  {
         max-width: 100%;
         width: 300px;
-        margin: 40px 0 30px;
         padding: 5px 15px;
         text-transform: uppercase;
+        }
+        &.addWorkout {
+        margin: 40px 0 15px;
+        color: #fff;
+        background: #000;
+        }
+        &.closePopup {
+        margin-bottom: 15px;
+        color: #222;
+        background: #ddd;
+        }
+        &.editWorkout {
         color: #fff;
         background: #000;
         }
@@ -69,12 +79,12 @@ export const H1 = styled.h1`
 
 export const H2 = styled.h2`
         text-align: center;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
         `
 
 export const H3 = styled.h3`
         text-align: center;
-        margin: 30px 0 25px;
+        margin: 25px 0 15px;
         `
 
 export const P = styled.p`

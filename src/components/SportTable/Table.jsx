@@ -68,7 +68,7 @@ const WorkoutTable = props => {
                         Комментарии
                     </Th>
                     <Th>
-                        Редактирование
+                        Управление
                     </Th>
                 </tr>
                 </thead>
@@ -80,15 +80,56 @@ const WorkoutTable = props => {
                             <Td>{item.distance}</Td>
                             <Td>{item.description}</Td>
                             <Td>
+                                {/*<Popup*/}
+                                {/*    editRow={props.editRow}*/}
+                                {/*    typeList={props.typeList}*/}
+                                {/*    btnType='Редактировать'*/}
+                                {/*    btnClassName='editWorkout'*/}
+                                {/*    onClick={() => props.editRow(item.key)}*/}
+                                {/*/>*/}
                                 <button
-                                    onClick={() => props.editRow(item.key)}
+                                    className={css`
+                                    margin: 0 5px;
+                                    padding: 0;
+                                    border: none;
+                                    background: none;
+                                    outline: none;
+                                    &:hover {
+                                    cursor: pointer;
+                                    opacity: .75;
+                                    }
+                                    &:after {
+                                    content: "\\270E";
+                                    border-radius: 3px;
+                                    padding: 3px 15px;
+                                    color: #fff;
+                                    background: #4b4;
+                                    }
+                                    `}
                                 >
-                                    Редактировать
                                 </button>
                                 <button
                                     onClick={() => props.deleteRow(item.key)}
+                                    className={css`
+                                    margin: 0 5px;
+                                    padding: 0;
+                                    border: none;
+                                    background: none;
+                                    outline: none;
+                                    transition: opacity .4s;
+                                    &:hover {
+                                    cursor: pointer;
+                                    opacity: .75;
+                                    }
+                                    &:after {
+                                    content: "\\2716";
+                                    border-radius: 3px;
+                                    padding: 3px 15px;
+                                    color: #fff;
+                                    background: #b44;
+                                    }
+                                    `}
                                 >
-                                    Удалить
                                 </button>
                             </Td>
                         </tr>

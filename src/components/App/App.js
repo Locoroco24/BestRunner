@@ -39,8 +39,9 @@ function App() {
     };
 
     const editRow = (key) => {
-        const editRow = workouts.findIndex( row => row.key === key );
-        console.log(workouts[editRow]);
+        const copyRow = workouts.findIndex( row => row.key === key );
+        console.log(workouts[copyRow]);
+
     };
 
     const filterType = (event) => {
@@ -68,6 +69,8 @@ function App() {
             <Popup
                 addRow={addRow.bind(this)}
                 typeList={typeList}
+                btnType='Добавить тренировку'
+                btnClassName='addWorkout'
             />
         </div>
     )

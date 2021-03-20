@@ -3,16 +3,11 @@ import ReactModal from 'react-modal';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from 'yup';
 import { css } from '@emotion/css';
-import styled from "@emotion/styled";
 import {Button, H2, H3, Div} from "../Styled";
 
 const Popup = props => {
 
     const [modalIsOpen,setIsOpen] = useState(false);
-
-    const afterOpenModal = () => {
-
-    };
 
     const openModal = () => {
         setIsOpen(true);
@@ -56,14 +51,13 @@ const Popup = props => {
             text-align: center;
         `}>
             <Button
-                className="addWorkout"
+                className={props.btnClassName}
                 onClick={openModal}
             >
-                Добавить тренировку
+                {props.btnType}
             </Button>
             <ReactModal
                 isOpen={modalIsOpen}
-                onAfterOpen={afterOpenModal}
                 onRequestClose={closeModal}
                 ariaHideApp={false}
             >
@@ -163,7 +157,7 @@ const Popup = props => {
                                 id="description"
                                 name="description"
                                 placeholder="Заметки о тренировке"
-                                maxlength="60"
+                                maxLength="60"
                                 className={css`
                                 max-width: 100%;
                                 width: 300px;
@@ -176,9 +170,16 @@ const Popup = props => {
                         </Div>
                         <Button
                             className="addWorkout"
-                            type='submit'
+                            type="submit"
                         >
                             Добавить тренировку
+                        </Button>
+                        <Button
+                            type="button"
+                            className="closePopup"
+                            onClick={closeModal}
+                        >
+                            Закрыть
                         </Button>
                     </Form>
                 </Formik>
