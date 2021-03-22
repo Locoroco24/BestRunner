@@ -1,6 +1,13 @@
 import styled from "@emotion/styled";
 import {css} from "@emotion/css";
 
+export const container = css`
+        width: 100%;
+        max-width: 1140px;
+        margin: 0 auto;
+        padding: 0 15px;
+        text-align: center;
+`
 
 export const Table = styled.table`
         margin-top: 20px;
@@ -51,18 +58,11 @@ export const Button = styled.button`
                 right: -15px;
             }
         }
-        &.addWorkout, &.closePopup  {
+        &.closePopup  {
         max-width: 100%;
         width: 300px;
         padding: 5px 15px;
         text-transform: uppercase;
-        }
-        &.addWorkout {
-        margin: 40px 0 15px;
-        color: #fff;
-        background: #000;
-        }
-        &.closePopup {
         margin-bottom: 15px;
         color: #222;
         background: #ddd;
@@ -72,6 +72,22 @@ export const Button = styled.button`
         background: #000;
         }
         `
+
+export const addWorkout = css`
+        max-width: 100%;
+        width: 300px;
+        padding: 5px 15px;
+        text-transform: uppercase;
+        margin: 40px 0 15px;
+        font-family: inherit;
+        font-weight: inherit;
+        font-size: inherit;
+        color: #fff;
+        background: #000;
+        border: none;
+        outline: none;
+        }
+`
 
 export const H1 = styled.h1`
         margin-top: 30px;
@@ -145,3 +161,20 @@ export const editBtn = css`
         background: #4b4;
         }
         `
+
+export const formField = css`
+        max-width: 100%;
+        width: 300px;
+        resize: none;
+        padding: 5px 15px;
+        font-family: inherit;
+        font-size: inherit;
+        `
+
+export const errorMassage = css`
+        text-align: center;
+        line-height: 20px;
+        margin-bottom: -20px;
+        color: #f00;
+        `
+

@@ -1,7 +1,8 @@
 import React from 'react';
 import useSortableData from "./SortableData";
 import { css } from '@emotion/css';
-import {Table, Td, Th, Button, H1, P, Select, deleteBtn, manageBtn, editBtn} from "../Styled";
+import {Table, Td, Th, Button, H1, P, Select, deleteBtn, editBtn} from "../Styled";
+import Popup from "../Popup/Popup";
 
 const WorkoutTable = props => {
     const { items, requestSort, sortConfig } = useSortableData(props.workouts);
@@ -73,17 +74,20 @@ const WorkoutTable = props => {
                 </tr>
                 </thead>
                 <tbody>
-                    {items.map(item => (
+                    {items.map((item, index) => (
                         <tr key={item.key}>
                             <Td>{item.date}</Td>
                             <Td>{item.type}</Td>
                             <Td>{item.distance}</Td>
                             <Td>{item.description}</Td>
                             <Td>
-                                <button
-                                    className={editBtn}
-                                >
-                                </button>
+                                <Popup
+                                    manageRow={props.editRow.bind(this)}
+                                    typeList={props.typeList}
+                                    AcceptBtnType='Редактировать тренировку'
+                                    defaultValues={props.workouts[index]}
+                                    class={editBtn}
+                                />
                                 <button
                                     onClick={() => props.deleteRow(item.key)}
                                     className={deleteBtn}

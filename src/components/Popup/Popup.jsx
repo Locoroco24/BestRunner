@@ -3,9 +3,15 @@ import ReactModal from 'react-modal';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from 'yup';
 import { css } from '@emotion/css';
-import {Button, H2, H3, Div} from "../Styled";
+import {Button, H2, H3, Div, addWorkout, formField, errorMassage} from "../Styled";
 
 const Popup = props => {
+
+    let defaultValue = ''
+
+    if (props.defaultValues) {
+        defaultValue = props.defaultValues
+    }
 
     const [modalIsOpen,setIsOpen] = useState(false);
 
@@ -18,22 +24,24 @@ const Popup = props => {
     };
 
     const initialValues = {
-            type: '',
-            date: '',
-            distance: '',
-            description: '',
-            key: ''
+            type: defaultValue.type,
+            date: defaultValue.date,
+            distance: defaultValue.distance,
+            description: defaultValue.description,
+            key: defaultValue.key
     };
 
     const onSubmit = values => {
         if (window.confirm('Сохранить тренировку?')) {
 
-            values.key = `${values.type}_${Date.now()}`;
+            if (!values.key) {
+                values.key = `${values.type}_${Date.now()}`;
+            }
 
             localStorage.setItem('workoutData', JSON.stringify(values));
 
             closeModal();
-            props.addRow();
+            props.manageRow(values.key);
         }
     };
 
@@ -48,14 +56,14 @@ const Popup = props => {
 
     return (
         <div className={css`
-            text-align: center;
+            display: inline;
         `}>
-            <Button
+            <button
                 onClick={openModal}
-                className='addWorkout'
+                className={props.class}
             >
-                Добавить тренировку
-            </Button>
+                {props.modalBtnType}
+            </button>
             <ReactModal
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}
@@ -104,24 +112,12 @@ const Popup = props => {
                                 type='date'
                                 id='date'
                                 name='date'
-                                className={css`
-                                max-width: 100%;
-                                width: 300px;
-                                padding: 5px 15px;
-                                font-family: inherit;
-                                font-size: inherit;
-                                text-transform: uppercase;
-                                `}
+                                className={formField}
                             />
                             <ErrorMessage
                                 name='date'
                                 component='p'
-                                className={css`
-                                text-align: center;
-                                line-height: 20px;
-                                margin-bottom: -20px;
-                                color: #f00;
-                                `}
+                                className={errorMassage}
                             />
                         </Div>
                         <Div>
@@ -131,22 +127,12 @@ const Popup = props => {
                                 type='text'
                                 id='distance'
                                 name='distance'
-                                className={css`
-                                max-width: 100%;
-                                width: 300px;
-                                padding: 5px 15px;
-                                font-size: 18px;
-                                `}
+                                className={formField}
                             />
                             <ErrorMessage
                                 name='distance'
                                 component='p'
-                                className={css`
-                                text-align: center;
-                                line-height: 20px;
-                                margin-bottom: -20px;
-                                color: #f00;
-                                `}
+                                className={errorMassage}
                             />
                         </Div>
                         <Div>
@@ -158,22 +144,15 @@ const Popup = props => {
                                 name='description'
                                 placeholder='Заметки о тренировке'
                                 maxLength='60'
-                                className={css`
-                                max-width: 100%;
-                                width: 300px;
-                                resize: none;
-                                padding: 5px 15px;
-                                font-family: inherit;
-                                font-size: inherit;
-                                `}
+                                className={formField}
                             />
                         </Div>
-                        <Button
-                            className='addWorkout'
+                        <button
+                            className={addWorkout}
                             type='submit'
                         >
-                            Добавить тренировку
-                        </Button>
+                            {props.AcceptBtnType}
+                        </button>
                         <Button
                             type='button'
                             className='closePopup'

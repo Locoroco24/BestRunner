@@ -2,6 +2,7 @@ import React, { useState} from 'react';
 import './App.css';
 import WorkoutTable from "../SportTable/Table";
 import Popup from "../Popup/Popup";
+import {addWorkout, container} from "../Styled";
 
 function App() {
 
@@ -39,9 +40,12 @@ function App() {
     };
 
     const editRow = (key) => {
-        const copyRow = workouts.findIndex( row => row.key === key );
-        console.log(workouts[copyRow]);
+        let rowIndex = workouts.findIndex( row => row.key === key );
+        workouts[rowIndex] = JSON.parse(localStorage.getItem('workoutData'))
+        const copyRows = [...workouts]
+        localStorage.setItem('workouts', JSON.stringify(copyRows));
 
+        setWorkout(copyRows)
     };
 
     const filterType = (event) => {
@@ -58,7 +62,7 @@ function App() {
 
 
     return (
-        <div className='container'>
+        <div className={container}>
             <WorkoutTable
                 workouts={workouts}
                 filterType={filterType.bind(this)}
@@ -67,8 +71,11 @@ function App() {
                 editRow={editRow}
              />
             <Popup
-                addRow={addRow.bind(this)}
+                manageRow={addRow.bind(this)}
                 typeList={typeList}
+                class={addWorkout}
+                modalBtnType='Добавить тренировку'
+                AcceptBtnType='Добавить тренировку'
             />
         </div>
     )
