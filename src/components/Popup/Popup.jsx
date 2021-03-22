@@ -31,6 +31,7 @@ const Popup = props => {
             key: defaultValue.key
     };
 
+
     const onSubmit = values => {
         if (window.confirm('Сохранить тренировку?')) {
 

@@ -4,7 +4,6 @@ import {container} from "./components/Styled";
 
 function App() {
 
-
     return (
         <div className={container}>
             <WorkoutTable />
