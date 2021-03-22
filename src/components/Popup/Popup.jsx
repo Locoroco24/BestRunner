@@ -51,10 +51,10 @@ const Popup = props => {
             text-align: center;
         `}>
             <Button
-                className={props.btnClassName}
                 onClick={openModal}
+                className='addWorkout'
             >
-                {props.btnType}
+                Добавить тренировку
             </Button>
             <ReactModal
                 isOpen={modalIsOpen}
@@ -74,7 +74,7 @@ const Popup = props => {
                     `}>
                         <Div>
                             <H3>Выберите тип тренировки</H3>
-                            <Div className="workoutType">
+                            <Div className='workoutType'>
                             {props.typeList.map( (type, index) => {
                                 if (index > 0) {
                                     return (
@@ -84,9 +84,9 @@ const Popup = props => {
                                         >
                                             <Field
                                                 value={type.value}
-                                                type="radio"
+                                                type='radio'
                                                 id={type.id}
-                                                name="type"
+                                                name='type'
                                             />
                                             {type.value}
                                         </label>
@@ -99,11 +99,11 @@ const Popup = props => {
                         </Div>
                         <Div>
                             <H3>Дата тренировки</H3>
-                            <label htmlFor="date"></label>
+                            <label htmlFor='date'></label>
                             <Field
-                                type="date"
-                                id="date"
-                                name="date"
+                                type='date'
+                                id='date'
+                                name='date'
                                 className={css`
                                 max-width: 100%;
                                 width: 300px;
@@ -114,8 +114,8 @@ const Popup = props => {
                                 `}
                             />
                             <ErrorMessage
-                                name="date"
-                                component="p"
+                                name='date'
+                                component='p'
                                 className={css`
                                 text-align: center;
                                 line-height: 20px;
@@ -126,11 +126,11 @@ const Popup = props => {
                         </Div>
                         <Div>
                             <H3>Километраж</H3>
-                            <label htmlFor="distance"></label>
+                            <label htmlFor='distance'></label>
                             <Field
-                                type="text"
-                                id="distance"
-                                name="distance"
+                                type='text'
+                                id='distance'
+                                name='distance'
                                 className={css`
                                 max-width: 100%;
                                 width: 300px;
@@ -139,8 +139,8 @@ const Popup = props => {
                                 `}
                             />
                             <ErrorMessage
-                                name="distance"
-                                component="p"
+                                name='distance'
+                                component='p'
                                 className={css`
                                 text-align: center;
                                 line-height: 20px;
@@ -151,13 +151,13 @@ const Popup = props => {
                         </Div>
                         <Div>
                             <H3>Комментарий</H3>
-                            <label htmlFor="description"></label>
+                            <label htmlFor='description'></label>
                             <Field
-                                component="textarea"
-                                id="description"
-                                name="description"
-                                placeholder="Заметки о тренировке"
-                                maxLength="60"
+                                component='textarea'
+                                id='description'
+                                name='description'
+                                placeholder='Заметки о тренировке'
+                                maxLength='60'
                                 className={css`
                                 max-width: 100%;
                                 width: 300px;
@@ -169,14 +169,14 @@ const Popup = props => {
                             />
                         </Div>
                         <Button
-                            className="addWorkout"
-                            type="submit"
+                            className='addWorkout'
+                            type='submit'
                         >
                             Добавить тренировку
                         </Button>
                         <Button
-                            type="button"
-                            className="closePopup"
+                            type='button'
+                            className='closePopup'
                             onClick={closeModal}
                         >
                             Закрыть

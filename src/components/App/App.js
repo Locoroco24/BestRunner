@@ -58,7 +58,7 @@ function App() {
 
 
     return (
-        <div className="container">
+        <div className='container'>
             <WorkoutTable
                 workouts={workouts}
                 filterType={filterType.bind(this)}
@@ -69,8 +69,6 @@ function App() {
             <Popup
                 addRow={addRow.bind(this)}
                 typeList={typeList}
-                btnType='Добавить тренировку'
-                btnClassName='addWorkout'
             />
         </div>
     )

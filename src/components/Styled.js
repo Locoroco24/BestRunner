@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import {css} from "@emotion/css";
 
 
 export const Table = styled.table`
@@ -107,5 +108,40 @@ export const Div = styled.div`
         width: 300px;
         flex-direction: row;
         justify-content: space-between;
+        }
+        `
+
+export const manageBtn = css`
+        margin: 0 5px;
+        padding: 0;
+        border: none;
+        background: none;
+        outline: none;
+        transition: opacity .4s;
+        &:hover {
+        cursor: pointer;
+        opacity: .75;
+        }
+        `
+
+export const deleteBtn = css`
+        ${manageBtn}
+        &:after {
+        content: "\\2716";
+        border-radius: 3px;
+        padding: 3px 15px;
+        color: #fff;
+        background: #b44;
+        }
+        `
+
+export const editBtn = css`
+        ${manageBtn}
+        &:after {
+        content: "\\270E";
+        border-radius: 3px;
+        padding: 3px 15px;
+        color: #fff;
+        background: #4b4;
         }
         `
