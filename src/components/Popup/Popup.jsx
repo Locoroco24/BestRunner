@@ -49,7 +49,6 @@ const Popup = props => {
         date: Yup.string()
             .required('Заполните поле'),
         distance: Yup.number()
-            .typeError('Введите числовое значение')
             .positive('Введите значение больше 0')
             .required('Заполните поле')
     });
@@ -124,7 +123,7 @@ const Popup = props => {
                             <H3>Километраж</H3>
                             <label htmlFor='distance'></label>
                             <Field
-                                type='text'
+                                type='number'
                                 id='distance'
                                 name='distance'
                                 className={formField}
