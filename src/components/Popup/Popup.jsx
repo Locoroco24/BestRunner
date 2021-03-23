@@ -3,7 +3,8 @@ import ReactModal from 'react-modal';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from 'yup';
 import { css } from '@emotion/css';
-import {Button, H2, H3, Div, addWorkout, formField, errorMassage} from "../Styled";
+import {Button, H2, H3, Div, addWorkoutBtn, formField, errorMassage} from "../Styled";
+import {connect} from "react-redux";
 
 const Popup = props => {
 
@@ -148,7 +149,7 @@ const Popup = props => {
                             />
                         </Div>
                         <button
-                            className={addWorkout}
+                            className={addWorkoutBtn}
                             type='submit'
                         >
                             {props.AcceptBtnType}
@@ -167,4 +168,4 @@ const Popup = props => {
     )
 }
 
-export default Popup;
+export default connect()(Popup);

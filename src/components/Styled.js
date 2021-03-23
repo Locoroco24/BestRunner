@@ -73,7 +73,7 @@ export const Button = styled.button`
         }
         `
 
-export const addWorkout = css`
+export const addWorkoutBtn = css`
         max-width: 100%;
         width: 300px;
         padding: 5px 15px;

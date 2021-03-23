@@ -1,17 +1,19 @@
 import React, {useState} from 'react';
+import {connect} from 'react-redux';
 import useSortableData from "./SortableData";
 import { css } from '@emotion/css';
-import {Table, Td, Th, Button, H1, P, Select, deleteBtn, editBtn, addWorkout} from "../Styled";
+import {Table, Td, Th, Button, H1, P, Select, deleteBtn, editBtn, addWorkoutBtn} from "../Styled";
 import Popup from "../Popup/Popup";
+import {addWorkout, deleteWorkout, editWorkout, filterWorkout} from "../../redux/actions";
 
-const WorkoutTable = () => {
+const WorkoutTable = ({workouts}) => {
 
-    const config = () => {
-        if(JSON.parse(localStorage.getItem('workouts')) === null) return [];
-        return JSON.parse(localStorage.getItem('workouts'));
-    };
+    // const config = () => {
+    //     if(JSON.parse(localStorage.getItem('workouts')) === null) return [];
+    //     return JSON.parse(localStorage.getItem('workouts'));
+    // };
 
-    const [workouts, setWorkout] = useState(config);
+    // const [workouts, setWorkout] = useState(config);
 
     const typeList = [
         {value: 'Без фильтра', id: 'noFilter'},
@@ -22,13 +24,14 @@ const WorkoutTable = () => {
     ];
 
     const addRow = () => {
-        const copyRows = [...workouts];
         const newWorkout = JSON.parse(localStorage.getItem('workoutData'));
-        copyRows.push(newWorkout);
-        localStorage.setItem('workouts', JSON.stringify(copyRows));
-
-        setWorkout(copyRows);
+        workouts.push(newWorkout);
+        localStorage.setItem('workouts', JSON.stringify(workouts));
+        addWorkout(JSON.parse(localStorage.getItem('workouts')))
     };
+
+
+    // localStorage.clear()
 
     const deleteRow = (key) => {
         const copyRows = [...workouts];
@@ -36,7 +39,7 @@ const WorkoutTable = () => {
         copyRows.splice(index, 1);
         localStorage.setItem('workouts', JSON.stringify(copyRows));
 
-        setWorkout(copyRows);
+        deleteWorkout(copyRows);
     };
 
     const editRow = (key) => {
@@ -46,7 +49,7 @@ const WorkoutTable = () => {
         const copyRows = [...workouts]
         localStorage.setItem('workouts', JSON.stringify(copyRows));
 
-        setWorkout(copyRows)
+        editWorkout(copyRows)
     };
 
     const filterType = (event) => {
@@ -58,7 +61,7 @@ const WorkoutTable = () => {
             return workouts;
         } );
 
-        setWorkout(filterWorkouts);
+        filterWorkout(filterWorkouts);
     };
 
     const { items, requestSort, sortConfig } = useSortableData(workouts);
@@ -155,9 +158,9 @@ const WorkoutTable = () => {
                 </tbody>
             </Table>
             <Popup
-                manageRow={addRow.bind(this)}
+                manageRow={addRow}
                 typeList={typeList}
-                class={addWorkout}
+                class={addWorkoutBtn}
                 modalBtnType='Добавить тренировку'
                 AcceptBtnType='Добавить тренировку'
             />
@@ -165,4 +168,16 @@ const WorkoutTable = () => {
     )
 }
 
-export default WorkoutTable
+
+
+const mapStateToProps = state => {
+    return {
+        workouts: state.workouts.workouts,
+    }}
+
+const mapDispatchToProps = {
+    addWorkout
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(WorkoutTable)
