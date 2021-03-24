@@ -8,23 +8,13 @@ import {openModal, closeModal} from "../../redux/actions";
 
 const Popup = (props) => {
 
-    // const [modalIsOpen,setIsOpen] = useState(false);
-    //
-    // const openModal = () => {
-    //     setIsOpen(true);
-    // };
-    //
-    // const closeModal = () => {
-    //     setIsOpen(false);
-    // };
-
     let defaultValues = {
         type: '',
         date: '',
         distance: '',
         description: '',
         key: ''
-    };
+    }
 
     if (props.defaultValues) {
         defaultValues = props.defaultValues;
@@ -39,9 +29,21 @@ const Popup = (props) => {
 
             localStorage.setItem('workoutData', JSON.stringify(values));
 
-            closeModal();
+            closeModal(props.key);
             props.manageRow(values.key);
         }
+    };
+
+    const popupModal = () => {
+        openModal(props.id)
+    }
+
+    const initialValues = {
+        type: defaultValues.type,
+        date: defaultValues.date,
+        distance: defaultValues.distance,
+        description: defaultValues.description,
+        key: defaultValues.key
     };
 
     const validationSchema = Yup.object({
@@ -57,19 +59,19 @@ const Popup = (props) => {
             display: inline;
         `}>
             <button
-                onClick={openModal}
+                onClick={popupModal}
                 className={props.class}
             >
                 {props.modalBtnType}
             </button>
             <ReactModal
-                isOpen={props.modal.isOpen}
+                isOpen={props.modal.modals[props.id]}
                 onRequestClose={closeModal}
                 ariaHideApp={false}
             >
                 <H2>Информация о тренировке</H2>
                 <Formik
-                    initialValues={defaultValues}
+                    initialValues={initialValues}
                     validationSchema={validationSchema}
                     onSubmit={onSubmit}
                 >

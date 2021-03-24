@@ -1,15 +1,13 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import useSortableData from "./SortableData";
 import { css } from '@emotion/css';
 import PropTypes from 'prop-types';
 import {Table, Td, Th, Button, H1, P, Select, deleteBtn, editBtn, addWorkoutBtn} from "../Styled";
 import Popup from "../Popup/Popup";
+import useSortableData from "./SortableData";
 import {addWorkout, deleteWorkout, editWorkout, filterWorkout} from "../../redux/actions";
 
 const WorkoutTable = ({workouts, modal}) => {
-
-    console.log(modal)
 
     const typeList = [
         {value: 'Без фильтра', id: 'noFilter'},
@@ -120,7 +118,7 @@ const WorkoutTable = ({workouts, modal}) => {
                 </tr>
                 </thead>
                 <tbody>
-                    {items.map((item) => (
+                    {items.map((item, index) => (
                         <tr key={item.key}>
                             <Td>{item.date}</Td>
                             <Td>{item.type}</Td>
@@ -132,8 +130,9 @@ const WorkoutTable = ({workouts, modal}) => {
                                     typeList={typeList}
                                     modal={modal}
                                     AcceptBtnType='Редактировать тренировку'
-                                    defaultValues={workouts[workouts.findIndex(workout => workout.key === item.key)]}
+                                    defaultValues={items[index]}
                                     class={editBtn}
+                                    id={item.key + ' Popup'}
                                 />
                                 <button
                                     onClick={() => deleteRow(item.key)}
@@ -152,6 +151,7 @@ const WorkoutTable = ({workouts, modal}) => {
                 class={addWorkoutBtn}
                 modalBtnType='Добавить тренировку'
                 AcceptBtnType='Добавить тренировку'
+                id='NewWorkout'
             />
         </div>
     )

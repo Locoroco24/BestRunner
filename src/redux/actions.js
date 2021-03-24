@@ -1,17 +1,21 @@
 import {OPEN_MODAL, CLOSE_MODAL, ADD_WORKOUT, DELETE_WORKOUT, EDIT_WORKOUT, FILTER_WORKOUT} from './types'
 import {store} from '../index'
 
-export function openModal() {
+export function openModal(id) {
     return store.dispatch({
         type: OPEN_MODAL,
-        payload: true
+        payload: {
+            [id]: true
+        }
     })
 }
 
-export function closeModal() {
+export function closeModal(id) {
     return store.dispatch({
         type: CLOSE_MODAL,
-        payload: false
+        payload: {
+            [id]: false
+        }
     })
 }
 
