@@ -1,15 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {createStore} from 'redux';
+import {applyMiddleware, compose, createStore} from 'redux';
 import {Provider} from 'react-redux';
+import logger from 'redux-logger'
 import './index.css';
 import App from './App';
 import {rootReducer} from './redux/rootReducer';
 import reportWebVitals from './reportWebVitals';
 
-export const store = createStore(rootReducer,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-)
+export const store = createStore(rootReducer, compose(
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+    applyMiddleware(logger)
+))
 
 const app = (
     <Provider store={store}>

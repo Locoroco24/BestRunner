@@ -1,37 +1,34 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ReactModal from 'react-modal';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from 'yup';
 import { css } from '@emotion/css';
 import {Button, H2, H3, Div, addWorkoutBtn, formField, errorMassage} from "../Styled";
-import {connect} from "react-redux";
+import {openModal, closeModal} from "../../redux/actions";
 
-const Popup = props => {
+const Popup = (props) => {
 
-    let defaultValue = ''
+    // const [modalIsOpen,setIsOpen] = useState(false);
+    //
+    // const openModal = () => {
+    //     setIsOpen(true);
+    // };
+    //
+    // const closeModal = () => {
+    //     setIsOpen(false);
+    // };
+
+    let defaultValues = {
+        type: '',
+        date: '',
+        distance: '',
+        description: '',
+        key: ''
+    };
 
     if (props.defaultValues) {
-        defaultValue = props.defaultValues
+        defaultValues = props.defaultValues;
     }
-
-    const [modalIsOpen,setIsOpen] = useState(false);
-
-    const openModal = () => {
-        setIsOpen(true);
-    };
-
-    const closeModal = () => {
-        setIsOpen(false);
-    };
-
-    const initialValues = {
-            type: defaultValue.type,
-            date: defaultValue.date,
-            distance: defaultValue.distance,
-            description: defaultValue.description,
-            key: defaultValue.key
-    };
-
 
     const onSubmit = values => {
         if (window.confirm('Сохранить тренировку?')) {
@@ -66,13 +63,13 @@ const Popup = props => {
                 {props.modalBtnType}
             </button>
             <ReactModal
-                isOpen={modalIsOpen}
+                isOpen={props.modal.isOpen}
                 onRequestClose={closeModal}
                 ariaHideApp={false}
             >
                 <H2>Информация о тренировке</H2>
                 <Formik
-                    initialValues={initialValues}
+                    initialValues={defaultValues}
                     validationSchema={validationSchema}
                     onSubmit={onSubmit}
                 >
@@ -168,4 +165,5 @@ const Popup = props => {
     )
 }
 
-export default connect()(Popup);
+
+export default Popup;

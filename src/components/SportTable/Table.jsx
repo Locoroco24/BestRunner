@@ -1,19 +1,15 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {connect} from 'react-redux';
 import useSortableData from "./SortableData";
 import { css } from '@emotion/css';
+import PropTypes from 'prop-types';
 import {Table, Td, Th, Button, H1, P, Select, deleteBtn, editBtn, addWorkoutBtn} from "../Styled";
 import Popup from "../Popup/Popup";
 import {addWorkout, deleteWorkout, editWorkout, filterWorkout} from "../../redux/actions";
 
-const WorkoutTable = ({workouts}) => {
+const WorkoutTable = ({workouts, modal}) => {
 
-    // const config = () => {
-    //     if(JSON.parse(localStorage.getItem('workouts')) === null) return [];
-    //     return JSON.parse(localStorage.getItem('workouts'));
-    // };
-
-    // const [workouts, setWorkout] = useState(config);
+    console.log(modal)
 
     const typeList = [
         {value: 'Без фильтра', id: 'noFilter'},
@@ -27,41 +23,32 @@ const WorkoutTable = ({workouts}) => {
         const newWorkout = JSON.parse(localStorage.getItem('workoutData'));
         workouts.push(newWorkout);
         localStorage.setItem('workouts', JSON.stringify(workouts));
-        addWorkout(JSON.parse(localStorage.getItem('workouts')))
+        addWorkout(JSON.parse(localStorage.getItem('workouts')));
     };
 
-
-    // localStorage.clear()
-
     const deleteRow = (key) => {
-        const copyRows = [...workouts];
-        const index = copyRows.findIndex(row => row.key === key);
-        copyRows.splice(index, 1);
-        localStorage.setItem('workouts', JSON.stringify(copyRows));
-
-        deleteWorkout(copyRows);
+        const index = workouts.findIndex(row => row.key === key);
+        workouts.splice(index, 1);
+        localStorage.setItem('workouts', JSON.stringify(workouts));
+        deleteWorkout(JSON.parse(localStorage.getItem('workouts')));
     };
 
     const editRow = (key) => {
-        let rowIndex = workouts.findIndex( row => row.key === key );
-        console.log(rowIndex)
-        workouts[rowIndex] = JSON.parse(localStorage.getItem('workoutData'))
-        const copyRows = [...workouts]
-        localStorage.setItem('workouts', JSON.stringify(copyRows));
-
-        editWorkout(copyRows)
+        const rowIndex = workouts.findIndex( row => row.key === key );
+        workouts[rowIndex] = JSON.parse(localStorage.getItem('workoutData'));
+        localStorage.setItem('workouts', JSON.stringify(workouts));
+        editWorkout(JSON.parse(localStorage.getItem('workouts')));
     };
 
     const filterType = (event) => {
         const targetFilter = event.target.value;
-        const filterWorkouts = JSON.parse(localStorage.getItem('workouts')).filter( item => {
+        const filteredWorkouts = JSON.parse(localStorage.getItem('workouts')).filter( item => {
             if (targetFilter !== 'Без фильтра') {
                 return item.type === targetFilter;
             }
             return workouts;
         } );
-
-        filterWorkout(filterWorkouts);
+        filterWorkout(filteredWorkouts);
     };
 
     const { items, requestSort, sortConfig } = useSortableData(workouts);
@@ -143,6 +130,7 @@ const WorkoutTable = ({workouts}) => {
                                 <Popup
                                     manageRow={editRow}
                                     typeList={typeList}
+                                    modal={modal}
                                     AcceptBtnType='Редактировать тренировку'
                                     defaultValues={workouts[workouts.findIndex(workout => workout.key === item.key)]}
                                     class={editBtn}
@@ -160,6 +148,7 @@ const WorkoutTable = ({workouts}) => {
             <Popup
                 manageRow={addRow}
                 typeList={typeList}
+                modal={modal}
                 class={addWorkoutBtn}
                 modalBtnType='Добавить тренировку'
                 AcceptBtnType='Добавить тренировку'
@@ -168,16 +157,14 @@ const WorkoutTable = ({workouts}) => {
     )
 }
 
-
-
-const mapStateToProps = state => {
-    return {
-        workouts: state.workouts.workouts,
-    }}
-
-const mapDispatchToProps = {
-    addWorkout
+WorkoutTable.propTypes = {
+    workouts: PropTypes.arrayOf(PropTypes.object)
 }
 
+const mapStateToProps = state => ({
+    workouts: state.workouts.workouts,
+    modal: state.modal
+})
 
-export default connect(mapStateToProps, mapDispatchToProps)(WorkoutTable)
+
+export default connect(mapStateToProps)(WorkoutTable)
