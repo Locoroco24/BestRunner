@@ -1,10 +1,7 @@
 import {CLOSE_MODAL, OPEN_MODAL} from "./types";
 
 const initialState = {
-    modals: {
-        ['NewWorkout']: false
-    }
-
+    modals: {}
 }
 
 export function modalReducer(state = initialState, action) {

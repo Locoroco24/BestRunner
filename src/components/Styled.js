@@ -30,6 +30,13 @@ export const Td = styled.td`
         text-align: center;
         `
 
+const hover = css`
+        &:hover {
+            cursor: pointer;
+            opacity: 0.75;
+        }
+        `
+
 export const Button = styled.button`
         position: relative;
         background: none;
@@ -40,17 +47,14 @@ export const Button = styled.button`
         border: none;
         outline: none;
         transition: opacity .4s;
-        &:hover {
-            cursor: pointer;
-            opacity: 0.75;
-        }
+        ${hover}
         &.ascending {
             &:after {
                 content: '\\2B07';
                 position: absolute;
                 right: -15px;
             }
-        };
+        }
         &.descending {
             &:after {
                 content: '\\2B06';
@@ -58,36 +62,35 @@ export const Button = styled.button`
                 right: -15px;
             }
         }
-        &.closePopup  {
-        max-width: 100%;
-        width: 300px;
-        padding: 5px 15px;
-        text-transform: uppercase;
-        margin-bottom: 15px;
-        color: #222;
-        background: #ddd;
-        }
-        &.editWorkout {
-        color: #fff;
-        background: #000;
-        }
         `
 
-export const addWorkoutBtn = css`
+export const wideBtn = css`
         max-width: 100%;
         width: 300px;
         padding: 5px 15px;
         text-transform: uppercase;
-        margin: 40px 0 15px;
         font-family: inherit;
         font-weight: inherit;
         font-size: inherit;
-        color: #fff;
-        background: #000;
         border: none;
         outline: none;
-        }
-`
+        `
+
+export const addWorkoutBtn = css`
+        ${wideBtn}
+        margin: 40px 0 15px;
+        color: #fff;
+        background: #000;
+        ${hover}
+        `
+
+export const closePopupBtn = css`
+        ${wideBtn}
+        margin-bottom: 15px;
+        color: #222;
+        background: #ddd;
+        ${hover}
+        `
 
 export const H1 = styled.h1`
         margin-top: 30px;
@@ -134,10 +137,7 @@ export const manageBtn = css`
         background: none;
         outline: none;
         transition: opacity .4s;
-        &:hover {
-        cursor: pointer;
-        opacity: .75;
-        }
+        ${hover}
         `
 
 export const deleteBtn = css`

@@ -10,12 +10,10 @@ export function openModal(id) {
     })
 }
 
-export function closeModal(id) {
+export function closeModal() {
     return store.dispatch({
         type: CLOSE_MODAL,
-        payload: {
-            [id]: false
-        }
+        payload: false
     })
 }
 

@@ -132,7 +132,7 @@ const WorkoutTable = ({workouts, modal}) => {
                                     AcceptBtnType='Редактировать тренировку'
                                     defaultValues={items[index]}
                                     class={editBtn}
-                                    id={item.key + ' Popup'}
+                                    id={item.key + '_Popup'}
                                 />
                                 <button
                                     onClick={() => deleteRow(item.key)}
@@ -151,7 +151,7 @@ const WorkoutTable = ({workouts, modal}) => {
                 class={addWorkoutBtn}
                 modalBtnType='Добавить тренировку'
                 AcceptBtnType='Добавить тренировку'
-                id='NewWorkout'
+                id='newWorkout'
             />
         </div>
     )

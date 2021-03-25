@@ -3,7 +3,7 @@ import ReactModal from 'react-modal';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from 'yup';
 import { css } from '@emotion/css';
-import {Button, H2, H3, Div, addWorkoutBtn, formField, errorMassage} from "../Styled";
+import {H2, H3, Div, formField, errorMassage, closePopupBtn, addWorkoutBtn} from "../Styled";
 import {openModal, closeModal} from "../../redux/actions";
 
 const Popup = (props) => {
@@ -29,7 +29,7 @@ const Popup = (props) => {
 
             localStorage.setItem('workoutData', JSON.stringify(values));
 
-            closeModal(props.key);
+            closeModal();
             props.manageRow(values.key);
         }
     };
@@ -153,13 +153,13 @@ const Popup = (props) => {
                         >
                             {props.AcceptBtnType}
                         </button>
-                        <Button
+                        <button
                             type='button'
-                            className='closePopup'
+                            className={closePopupBtn}
                             onClick={closeModal}
                         >
                             Закрыть
-                        </Button>
+                        </button>
                     </Form>
                 </Formik>
             </ReactModal>
