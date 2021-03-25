@@ -1,4 +1,4 @@
-import {ADD_WORKOUT, DELETE_WORKOUT, EDIT_WORKOUT, FILTER_WORKOUT} from "./types";
+import {ADD_WORKOUT, DELETE_WORKOUT, EDIT_WORKOUT, FILTER_WORKOUT} from './types';
 
 const defaultValues = JSON.parse(localStorage.getItem('workouts')) || []
 

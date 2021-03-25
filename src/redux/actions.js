@@ -22,6 +22,17 @@ export function addWorkout(workout) {
         type: ADD_WORKOUT,
         payload:  workout
     })
+    // return async dispatch => {
+    //     const response = await fetch("/api/users", {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json; charset=utf-8"
+    //         },
+    //         body: JSON.stringify(workout)
+    //     });
+    //
+    //     const json = await response.json();
+    //     dispatch({type: ADD_WORKOUT, payload: json});
 }
 
 export function deleteWorkout(workout) {

@@ -4,7 +4,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from 'yup';
 import { css } from '@emotion/css';
 import {H2, H3, Div, formField, errorMassage, closePopupBtn, addWorkoutBtn} from "../Styled";
-import {openModal, closeModal} from "../../redux/actions";
+import {openModal, closeModal} from '../../redux/actions';
 
 const Popup = (props) => {
 

@@ -2,10 +2,10 @@ import React from 'react';
 import {connect} from 'react-redux';
 import { css } from '@emotion/css';
 import PropTypes from 'prop-types';
-import {Table, Td, Th, Button, H1, P, Select, deleteBtn, editBtn, addWorkoutBtn} from "../Styled";
-import Popup from "../Popup/Popup";
-import useSortableData from "./SortableData";
-import {addWorkout, deleteWorkout, editWorkout, filterWorkout} from "../../redux/actions";
+import {Table, Td, Th, Button, H1, P, Select, deleteBtn, editBtn, addWorkoutBtn} from '../Styled';
+import Popup from '../Popup/Popup';
+import useSortableData from './SortableData';
+import {addWorkout, deleteWorkout, editWorkout, filterWorkout} from '../../redux/actions';
 
 const WorkoutTable = ({workouts, modal}) => {
 

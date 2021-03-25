@@ -30,12 +30,11 @@ export const Td = styled.td`
         text-align: center;
         `
 
-const hover = css`
+const hover = `
         &:hover {
-            cursor: pointer;
-            opacity: 0.75;
-        }
-        `
+        cursor: pointer;
+        opacity: 0.75;
+        }`
 
 export const Button = styled.button`
         position: relative;
@@ -130,7 +129,7 @@ export const Div = styled.div`
         }
         `
 
-export const manageBtn = css`
+export const manageBtn = `
         margin: 0 5px;
         padding: 0;
         border: none;
