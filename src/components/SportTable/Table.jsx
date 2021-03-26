@@ -9,8 +9,8 @@ import {typeList} from "../../redux/types";
 import {addWorkout, deleteWorkout, editWorkout, filterWorkouts} from "../../redux/actions";
 
 const WorkoutTable = () => {
-    const workouts = useSelector(store => store.workouts)
-    const filterType = useSelector(store => store.filterType)
+    const workouts = useSelector(store => store.workouts);
+    const filterType = useSelector(store => store.filterType);
 
     const filteredWorkouts = workouts.filter( item => {
         if (filterType !== 'Без фильтра') {

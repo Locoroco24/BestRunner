@@ -5,7 +5,7 @@ export function addWorkout(workout) {
     return workoutStore.dispatch({
         type: ADD_WORKOUT,
         payload:  workout
-    })
+    });
     // return async dispatch => {
     //     const response = await fetch("/api/users", {
     //         method: "POST",
@@ -23,19 +23,19 @@ export function deleteWorkout(workout) {
     return workoutStore.dispatch({
         type: DELETE_WORKOUT,
         payload:  workout
-    })
+    });
 }
 
 export function editWorkout(workout) {
     return workoutStore.dispatch({
         type: EDIT_WORKOUT,
         payload:  workout
-    })
+    });
 }
 
 export function filterWorkouts(event) {
     return workoutStore.dispatch({
         type: FILTER_WORKOUTS,
         payload:  event
-    })
+    });
 }

@@ -23,7 +23,7 @@ const Popup = (props) => {
         distance: '',
         description: '',
         key: ''
-    }
+    };
 
     if (props.defaultValues) {
         defaultValues = props.defaultValues;
