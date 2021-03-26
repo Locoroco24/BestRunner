@@ -1,55 +1,25 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import { css } from '@emotion/css';
+import {useSelector} from 'react-redux';
+import {css} from '@emotion/css';
 import PropTypes from 'prop-types';
 import {Table, Td, Th, Button, H1, P, Select, deleteBtn, editBtn, addWorkoutBtn} from '../Styled';
 import Popup from '../Popup/Popup';
 import useSortableData from './SortableData';
-import {addWorkout, deleteWorkout, editWorkout, filterWorkout} from '../../redux/actions';
+import {typeList} from "../../redux/types";
+import {addWorkout, deleteWorkout, editWorkout, filterWorkouts} from "../../redux/actions";
 
-const WorkoutTable = ({workouts, modal}) => {
+const WorkoutTable = () => {
+    const workouts = useSelector(store => store.workouts)
+    const filterType = useSelector(store => store.filterType)
 
-    const typeList = [
-        {value: 'Без фильтра', id: 'noFilter'},
-        {value: 'Бег', id: 'run'},
-        {value: 'Велосипед', id: 'bike'},
-        {value: 'Лыжи', id: 'ski'},
-        {value: 'Хотьба', id: 'walking'},
-    ];
+    const filteredWorkouts = workouts.filter( item => {
+        if (filterType !== 'Без фильтра') {
+            return item.type === filterType;
+        }
+        return workouts;
+    });
 
-    const addRow = () => {
-        const newWorkout = JSON.parse(localStorage.getItem('workoutData'));
-        workouts.push(newWorkout);
-        localStorage.setItem('workouts', JSON.stringify(workouts));
-        addWorkout(JSON.parse(localStorage.getItem('workouts')));
-    };
-
-    const deleteRow = (key) => {
-        const index = workouts.findIndex(row => row.key === key);
-        workouts.splice(index, 1);
-        localStorage.setItem('workouts', JSON.stringify(workouts));
-        deleteWorkout(JSON.parse(localStorage.getItem('workouts')));
-    };
-
-    const editRow = (key) => {
-        const rowIndex = workouts.findIndex( row => row.key === key );
-        workouts[rowIndex] = JSON.parse(localStorage.getItem('workoutData'));
-        localStorage.setItem('workouts', JSON.stringify(workouts));
-        editWorkout(JSON.parse(localStorage.getItem('workouts')));
-    };
-
-    const filterType = (event) => {
-        const targetFilter = event.target.value;
-        const filteredWorkouts = JSON.parse(localStorage.getItem('workouts')).filter( item => {
-            if (targetFilter !== 'Без фильтра') {
-                return item.type === targetFilter;
-            }
-            return workouts;
-        } );
-        filterWorkout(filteredWorkouts);
-    };
-
-    const { items, requestSort, sortConfig } = useSortableData(workouts);
+    const { items, requestSort, sortConfig } = useSortableData(filteredWorkouts);
     const getClassNamesFor = (name) => {
         if (!sortConfig) {
             return;
@@ -68,7 +38,7 @@ const WorkoutTable = ({workouts, modal}) => {
                 align-items: center;
             `}>
                 <P>Фильтрация по типу тренировки</P>
-                <Select onChange={filterType}>
+                <Select onChange={filterWorkouts}>
                     {typeList.map( (type, index) => (
                         <option
                             key={index}
@@ -126,16 +96,14 @@ const WorkoutTable = ({workouts, modal}) => {
                             <Td>{item.description}</Td>
                             <Td>
                                 <Popup
-                                    manageRow={editRow}
+                                    manageRow={editWorkout}
                                     typeList={typeList}
-                                    modal={modal}
                                     AcceptBtnType='Редактировать тренировку'
                                     defaultValues={items[index]}
                                     class={editBtn}
-                                    id={item.key + '_Popup'}
                                 />
                                 <button
-                                    onClick={() => deleteRow(item.key)}
+                                    onClick={() => deleteWorkout(item.key)}
                                     className={deleteBtn}
                                 >
                                 </button>
@@ -145,13 +113,11 @@ const WorkoutTable = ({workouts, modal}) => {
                 </tbody>
             </Table>
             <Popup
-                manageRow={addRow}
+                manageRow={addWorkout}
                 typeList={typeList}
-                modal={modal}
                 class={addWorkoutBtn}
                 modalBtnType='Добавить тренировку'
                 AcceptBtnType='Добавить тренировку'
-                id='newWorkout'
             />
         </div>
     )
@@ -161,10 +127,4 @@ WorkoutTable.propTypes = {
     workouts: PropTypes.arrayOf(PropTypes.object)
 }
 
-const mapStateToProps = state => ({
-    workouts: state.workouts.workouts,
-    modal: state.modal
-})
-
-
-export default connect(mapStateToProps)(WorkoutTable)
+export default WorkoutTable;

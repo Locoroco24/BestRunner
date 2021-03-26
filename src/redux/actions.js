@@ -1,24 +1,8 @@
-import {OPEN_MODAL, CLOSE_MODAL, ADD_WORKOUT, DELETE_WORKOUT, EDIT_WORKOUT, FILTER_WORKOUT} from './types'
-import {store} from '../index'
-
-export function openModal(id) {
-    return store.dispatch({
-        type: OPEN_MODAL,
-        payload: {
-            [id]: true
-        }
-    })
-}
-
-export function closeModal() {
-    return store.dispatch({
-        type: CLOSE_MODAL,
-        payload: false
-    })
-}
+import {ADD_WORKOUT, DELETE_WORKOUT, EDIT_WORKOUT, FILTER_WORKOUTS} from './types'
+import {workoutStore} from '../index'
 
 export function addWorkout(workout) {
-    return store.dispatch({
+    return workoutStore.dispatch({
         type: ADD_WORKOUT,
         payload:  workout
     })
@@ -36,22 +20,22 @@ export function addWorkout(workout) {
 }
 
 export function deleteWorkout(workout) {
-    return store.dispatch({
+    return workoutStore.dispatch({
         type: DELETE_WORKOUT,
         payload:  workout
     })
 }
 
 export function editWorkout(workout) {
-    return store.dispatch({
+    return workoutStore.dispatch({
         type: EDIT_WORKOUT,
         payload:  workout
     })
 }
 
-export function filterWorkout(workouts) {
-    return store.dispatch({
-        type: FILTER_WORKOUT,
-        payload:  workouts
+export function filterWorkouts(event) {
+    return workoutStore.dispatch({
+        type: FILTER_WORKOUTS,
+        payload:  event
     })
 }

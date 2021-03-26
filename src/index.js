@@ -6,16 +6,16 @@ import logger from 'redux-logger'
 import thunk from 'redux-thunk';
 import './index.css';
 import App from './App';
-import {rootReducer} from './redux/rootReducer';
 import reportWebVitals from './reportWebVitals';
+import {initialState, workoutsReducer} from "./redux/reducer";
 
-export const store = createStore(rootReducer, compose(
+export const workoutStore = createStore(workoutsReducer, initialState, compose(
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
     applyMiddleware(logger, thunk)
 ))
 
 const app = (
-    <Provider store={store}>
+    <Provider store={workoutStore}>
         <App />
     </Provider>
 )

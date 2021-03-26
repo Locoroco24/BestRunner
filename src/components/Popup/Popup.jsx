@@ -1,12 +1,21 @@
 import React from 'react';
 import ReactModal from 'react-modal';
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import {Formik, Form, Field, ErrorMessage} from "formik";
 import * as Yup from 'yup';
-import { css } from '@emotion/css';
+import {css}  from '@emotion/css';
 import {H2, H3, Div, formField, errorMassage, closePopupBtn, addWorkoutBtn} from "../Styled";
-import {openModal, closeModal} from '../../redux/actions';
 
 const Popup = (props) => {
+
+    const [modalIsOpen,setIsOpen] = React.useState(false);
+
+    const openModal = () => {
+        setIsOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsOpen(false);
+    };
 
     let defaultValues = {
         type: '',
@@ -20,23 +29,12 @@ const Popup = (props) => {
         defaultValues = props.defaultValues;
     }
 
-    const onSubmit = values => {
+    const onSubmit = (value) => {
         if (window.confirm('Сохранить тренировку?')) {
-
-            if (!values.key) {
-                values.key = `${values.type}_${Date.now()}`;
-            }
-
-            localStorage.setItem('workoutData', JSON.stringify(values));
-
+            props.manageRow(value)
             closeModal();
-            props.manageRow(values.key);
         }
     };
-
-    const popupModal = () => {
-        openModal(props.id)
-    }
 
     const initialValues = {
         type: defaultValues.type,
@@ -47,6 +45,8 @@ const Popup = (props) => {
     };
 
     const validationSchema = Yup.object({
+        type: Yup.string()
+            .required('Выберите тип тренировки'),
         date: Yup.string()
             .required('Заполните поле'),
         distance: Yup.number()
@@ -59,13 +59,13 @@ const Popup = (props) => {
             display: inline;
         `}>
             <button
-                onClick={popupModal}
+                onClick={openModal}
                 className={props.class}
             >
                 {props.modalBtnType}
             </button>
             <ReactModal
-                isOpen={props.modal.modals[props.id]}
+                isOpen={modalIsOpen}
                 onRequestClose={closeModal}
                 ariaHideApp={false}
             >
@@ -104,6 +104,11 @@ const Popup = (props) => {
                             }
                             )}
                             </Div>
+                            <ErrorMessage
+                                name='type'
+                                component='p'
+                                className={errorMassage}
+                            />
                         </Div>
                         <Div>
                             <H3>Дата тренировки</H3>
