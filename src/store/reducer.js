@@ -1,9 +1,24 @@
 import {ADD_WORKOUT, DELETE_WORKOUT, EDIT_WORKOUT, FILTER_WORKOUTS} from './types';
 
+async function workouts() {
+    const response = await fetch('/api/workouts', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json; charset=utf-8'
+        }
+    });
+    return await response.json();
+}
+
 export const initialState = {
     workouts: [],
     filterType: 'Без фильтра'
 };
+
+(async() => {
+    const result = await workouts();
+    initialState.workouts = result
+})();
 
 export const workoutsReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -20,12 +35,13 @@ export const workoutsReducer = (state = initialState, action) => {
 };
 
 const addWorkout = (state, workout) => {
-    workout.key = `${workout.type}_${Date.now()}`;
     return {...state, workouts: [...state.workouts, workout]};
 };
 
-const deleteWorkout = (state, key ) => {
-    state.workouts.splice(state.workouts.findIndex(item => item.key === key), 1);
+const deleteWorkout = (state, workout ) => {
+    const index =  state.workouts.findIndex(item => item.key === workout.key);
+    console.log(index)
+    state.workouts.splice(index, 1);
     return {...state, workouts: [...state.workouts]};
 };
 

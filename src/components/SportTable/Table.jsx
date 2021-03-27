@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 import {Table, Td, Th, Button, H1, P, Select, deleteBtn, editBtn, addWorkoutBtn} from '../Styled';
 import Popup from '../Popup/Popup';
 import useSortableData from './SortableData';
-import {typeList} from "../../redux/types";
-import {addWorkout, deleteWorkout, editWorkout, filterWorkouts} from "../../redux/actions";
+import {typeList} from '../../store/types';
+import {addWorkout, deleteWorkout, editWorkout, filterWorkouts} from '../../store/actions';
 
 const WorkoutTable = () => {
     const workouts = useSelector(store => store.workouts);

@@ -1,6 +1,6 @@
 import React from 'react';
-import WorkoutTable from "./components/SportTable/Table";
-import {container} from "./components/Styled";
+import WorkoutTable from './components/SportTable/Table';
+import {container} from './components/Styled';
 
 function App() {
 

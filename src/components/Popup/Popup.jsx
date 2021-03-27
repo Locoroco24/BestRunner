@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactModal from 'react-modal';
-import {Formik, Form, Field, ErrorMessage} from "formik";
+import {Formik, Form, Field, ErrorMessage} from 'formik';
 import * as Yup from 'yup';
 import {css}  from '@emotion/css';
-import {H2, H3, Div, formField, errorMassage, closePopupBtn, addWorkoutBtn} from "../Styled";
+import {H2, H3, Div, formField, errorMassage, closePopupBtn, addWorkoutBtn} from '../Styled';
 
 const Popup = (props) => {
 

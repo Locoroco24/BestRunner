@@ -7,7 +7,7 @@ import thunk from 'redux-thunk';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {initialState, workoutsReducer} from "./redux/reducer";
+import {initialState, workoutsReducer} from './store/reducer';
 
 export const workoutStore = createStore(workoutsReducer, initialState, compose(
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
