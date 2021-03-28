@@ -10,7 +10,6 @@ import reportWebVitals from './reportWebVitals';
 import {initialState, workoutsReducer} from './store/reducer';
 
 export const workoutStore = createStore(workoutsReducer, initialState, compose(
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
     applyMiddleware(logger, thunk)
 ))
 
