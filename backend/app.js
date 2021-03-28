@@ -91,12 +91,4 @@ app.put('/api/workouts', jsonParser, function(req, res) {
   }
 });
 
-const port = 3002;
-
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-})
-
-app.listen(port)
-
 module.exports = app;
