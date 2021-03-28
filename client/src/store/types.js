@@ -9,5 +9,5 @@ export const typeList = [
     { value: 'Бег', id: 'run' },
     { value: 'Велосипед', id: 'bike' },
     { value: 'Лыжи', id: 'ski' },
-    { value: 'Хотьба', id: 'walking' },
+    { value: 'Ходьба', id: 'walking' },
 ];
