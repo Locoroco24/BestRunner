@@ -1,5 +1,23 @@
-import {ADD_WORKOUT, DELETE_WORKOUT, EDIT_WORKOUT, FILTER_WORKOUTS} from './types';
+import {ADD_WORKOUT, DELETE_WORKOUT, EDIT_WORKOUT, FILTER_WORKOUTS, GET_WORKOUTS} from './types';
 import {workoutStore} from '../index';
+
+export function getWorkouts() {
+    async function f() {
+        const response = await fetch('/api/workouts', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            }
+        });
+        const result = await response.json();
+
+        return workoutStore.dispatch({
+            type: GET_WORKOUTS,
+            payload: result
+        });
+    }
+    return f();
+}
 
 export function addWorkout(workout) {
     async function f() {
