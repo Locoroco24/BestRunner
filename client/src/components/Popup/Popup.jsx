@@ -5,6 +5,16 @@ import * as Yup from 'yup';
 import {css}  from '@emotion/css';
 import {H2, H3, Div, formField, errorMassage, closePopupBtn, addWorkoutBtn} from '../Styled';
 
+const validationSchema = Yup.object({
+    type: Yup.string()
+      .required('Выберите тип тренировки'),
+    date: Yup.string()
+      .required('Заполните поле'),
+    distance: Yup.number()
+      .positive('Введите значение больше 0')
+      .required('Заполните поле')
+});
+
 const Popup = (props) => {
 
     const [modalIsOpen,setIsOpen] = React.useState(false);
@@ -17,18 +27,6 @@ const Popup = (props) => {
         setIsOpen(false);
     };
 
-    let defaultValues = {
-        type: '',
-        date: '',
-        distance: '',
-        description: '',
-        key: ''
-    };
-
-    if (props.defaultValues) {
-        defaultValues = props.defaultValues;
-    }
-
     const onSubmit = (value) => {
         if (window.confirm('Сохранить тренировку?')) {
             props.manageRow(value)
@@ -37,22 +35,12 @@ const Popup = (props) => {
     };
 
     const initialValues = {
-        type: defaultValues.type,
-        date: defaultValues.date,
-        distance: defaultValues.distance,
-        description: defaultValues.description,
-        key: defaultValues.key
+        type: props.defaultValues?.type || '',
+        date: props.defaultValues?.date || '',
+        distance: props.defaultValues?.distance || '',
+        description: props.defaultValues?.description || '',
+        key: props.defaultValues?.key || ''
     };
-
-    const validationSchema = Yup.object({
-        type: Yup.string()
-            .required('Выберите тип тренировки'),
-        date: Yup.string()
-            .required('Заполните поле'),
-        distance: Yup.number()
-            .positive('Введите значение больше 0')
-            .required('Заполните поле')
-    });
 
     return (
         <div className={css`

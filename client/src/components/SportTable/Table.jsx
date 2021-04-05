@@ -1,8 +1,7 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
-import {css} from '@emotion/css';
 import PropTypes from 'prop-types';
-import {Table, Td, Th, Button, H1, P, Select, deleteBtn, editBtn, addWorkoutBtn} from '../Styled';
+import {Table, Td, Th, Button, H1, P, Select, deleteBtn, editBtn, addWorkoutBtn, Wrapper} from '../Styled';
 import Popup from '../Popup/Popup';
 import useSortableData from './SortableData';
 import {typeList} from '../../store/types';
@@ -27,16 +26,14 @@ const WorkoutTable = () => {
         return sortConfig.key === name ? sortConfig.direction : undefined;
     };
 
+    const toggleSortType = (value) => {
+        requestSort(value.target.value)
+    }
+
     return (
         <div>
             <H1>BestRunner</H1>
-            <div
-                className={css`
-                margin-top: 30px;
-                display: flex;
-                justify-content: flex-end;
-                align-items: center;
-            `}>
+            <Wrapper>
                 <P>Фильтрация по типу тренировки</P>
                 <Select onChange={filterWorkouts}>
                     {typeList.map( (type, index) => (
@@ -48,14 +45,15 @@ const WorkoutTable = () => {
                         </option>
                     ))}
                 </Select>
-            </div>
+            </Wrapper>
             <Table>
                 <thead>
                 <tr>
                     <Th>
                         <Button
                             type='button'
-                            onClick={() => requestSort('date')}
+                            value='date'
+                            onClick={toggleSortType}
                             className={getClassNamesFor('date')}
                         >
                             Дата тренировки
@@ -64,7 +62,8 @@ const WorkoutTable = () => {
                     <Th>
                         <Button
                             type='button'
-                            onClick={() => requestSort('type')}
+                            value='type'
+                            onClick={toggleSortType}
                             className={getClassNamesFor('type')}
                         >
                             Тип тренировки
@@ -73,7 +72,8 @@ const WorkoutTable = () => {
                     <Th>
                         <Button
                             type='button'
-                            onClick={() => requestSort('distance')}
+                            value='distance'
+                            onClick={toggleSortType}
                             className={getClassNamesFor('distance')}
                         >
                             Километраж

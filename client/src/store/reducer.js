@@ -30,25 +30,28 @@ const addWorkout = (state, workout) => {
 };
 
 const deleteWorkout = (state, workout ) => {
-    const index =  state.workouts.findIndex(item => item.key === workout.key);
-    state.workouts.splice(index, 1);
-    return {...state, workouts: [...state.workouts]};
+    const newState = state
+    const index =  newState.workouts.findIndex(item => item.key === workout.key);
+    newState.workouts.splice(index, 1);
+    return {...newState, workouts: [...newState.workouts]};
 };
 
 const editWorkout = (state, { key, type, date, distance, description }) => {
-    const index = state.workouts.findIndex(item => item.key === key);
-    state.workouts[index] = {
+    const newState = state
+    const index = newState.workouts.findIndex(item => item.key === key);
+    newState.workouts[index] = {
         type,
         date,
         distance,
         description,
         key
     };
-    return {...state, workouts: [...state.workouts]};
+    return {...newState, workouts: [...newState.workouts]};
 };
 
 const filterWorkouts = (state, event) => {
-    state.filterType = event.target.value;
-    return {...state, filterType: state.filterType};
+    const newState = state
+    newState.filterType = event.target.value;
+    return {...newState, filterType: newState.filterType};
 };
 

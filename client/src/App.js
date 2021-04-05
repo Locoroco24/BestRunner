@@ -5,7 +5,7 @@ import {getWorkouts} from "./store/actions";
 
 function App() {
 
-    React.useEffect(()=> getWorkouts());
+    React.useEffect(()=> getWorkouts(), []);
 
     return (
         <div className={container}>

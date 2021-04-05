@@ -129,6 +129,13 @@ export const Div = styled.div`
         }
         `
 
+export const Wrapper = styled.div`
+        margin-top: 30px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        `
+
 export const manageBtn = `
         margin: 0 5px;
         padding: 0;
